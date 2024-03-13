@@ -73,7 +73,7 @@ evo_traj kitti 00_Seg.kitti 00_onlyPC.kitti 00_SF.kitti 00_SSF.kitti --ref=00_Se
 
 
 
-# 4.Visualizaiton Videos
+## 4.Visualizaiton Videos
 <img src="figures/experiment.gif">
 
 ## Acknowledgements
