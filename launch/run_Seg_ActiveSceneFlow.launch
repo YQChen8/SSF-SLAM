@@ -1,0 +1,18 @@
+<launch>
+    <arg name="project" default="sloam"/>
+    <!--定义参数并通过arg给参数赋值-->
+    <arg name="RESULT_PATH" default="/home/zhijun/catkin_ws/src/my-S-LOAM/result/Seg04test.tum"/>
+
+    <node pkg="$(arg project)" type="frameFeature" name="frameFeature" output="screen" respawn="true"/>
+    <node pkg="$(arg project)" type="lidarOdometry" name="lidarOdometry" output="screen" respawn="true"/>
+    <!-- 启动process_sub_pub节点 -->
+    <node pkg="$(arg project)" type="mapOptmization" name="mapOptmization" output="screen" respawn="true">
+        <param name="RESULT_PATH" type="string" value="$(arg RESULT_PATH)"/>
+    </node>
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find sloam)/launch/rviz.rviz"/>
+
+    <node pkg="$(arg project)" type="main_sju_occ_addSeg_ros.py" name="velodyne_points_odometry_node" output="screen">
+        <param name="DATASET_PATH" type="string" value="$(arg DATASET_PATH)"/>
+    </node>
+</launch>
